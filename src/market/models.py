@@ -13,10 +13,19 @@ class Company(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["name"]
+        verbose_name = "Company"
+        verbose_name_plural = "Companies"
+
     def save(self, *args, **kwargs):
         self.ticker = f"{self.ticker}".upper()
         super().save(*args, **kwargs)
         tasks.sync_company_stock_quotes.delay(self.pk)
+
+    def __str__(self):
+        return f"{self.name} ({self.ticker})"
+
 
 class StockQuote(models.Model):
     """

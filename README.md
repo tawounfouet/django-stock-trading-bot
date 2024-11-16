@@ -53,8 +53,8 @@ git commit -m "It's my bot now"
 Create a Python vitual environment
 _macOS/Linux/WSL_
 ```bash
-python3.12 -m venv venv
-source venv/bin/activate
+python3.12 -m venv _venv
+source _venv/bin/activate
 ```
 
 _windows powershell_
@@ -71,6 +71,11 @@ Install requirements
 Docker Compose Up (for local TimescaleDB and Redis)
 ```bash
 docker compose -f compose.yaml up -d
+docker ps
+
+docker compose down -v
+
+docker compose stop
 ```
 > If you don't have Docker, use [TimescaleDB Cloud](tsdb.co/justin) and [Upstash Redis](https://upstash.com/?utm_source=cfe)
 

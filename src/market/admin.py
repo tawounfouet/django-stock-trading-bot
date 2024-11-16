@@ -8,7 +8,15 @@ from rangefilter.filters import (
 # Register your models here.
 from .models import StockQuote, Company
 
-admin.site.register(Company)
+#admin.site.register(Company)
+# Register the Company model in the admin interface
+@admin.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ["name", "ticker", "active", "timestamp", "updated"]
+    list_filter = ["active", "timestamp", "updated"]
+    search_fields = ["name", "ticker"]
+    ordering = ["name"]
+
 
 class StockQuoteAdmin(admin.ModelAdmin):
     list_display = ['company__ticker', 'close_price', 'localized_time', 'time']
